@@ -1,4 +1,4 @@
-var User = require('../models/user.js')
+var User = require('../config/passport.js').user
 
 function create(req, res){
 	var user = new User(req.body.user)
