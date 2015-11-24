@@ -88,7 +88,7 @@ app.get('/', function(req,res){
 })
 
 //import routes
-// app.use('/api', apiRouter)
+app.use('/api', apiRouter)
 
 app.listen(port, function(){
 	console.log("Server running on port", port)
