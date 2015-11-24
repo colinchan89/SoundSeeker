@@ -8,8 +8,8 @@ var mongoose = require('mongoose'),
 			email: {type: String, require: true},
 			password: {type: String, require: true},
 			zip: String
-},
-	facebook: {
+ },
+		facebook: {
         id: String,
         name: String,
         token: String,

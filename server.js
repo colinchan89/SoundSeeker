@@ -38,7 +38,9 @@ soundcloud.init({
 
 //root route
 app.get('/', function(req,res){
+
 	res.render('index')
+
 })
 
 //import routes
