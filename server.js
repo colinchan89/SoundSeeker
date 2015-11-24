@@ -93,3 +93,23 @@ app.get('/', function(req,res){
 app.listen(port, function(){
 	console.log("Server running on port", port)
 })
+
+//Ted added for passport
+// ejs configuration
+app.set('view engine', 'ejs')
+app.use(ejsLayouts)
+
+//root route
+app.get('/', function(req,res){
+    res.render('index')
+})
+
+app.listen(port, function(){
+    console.log("Server running on port", port)
+})
+
+// middleware
+app.use(logger('dev'))
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
