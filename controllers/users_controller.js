@@ -17,9 +17,16 @@ function index(req,res){
 }
 
 function show(req,res){
-	User.find({email: req.params.email}, function(err,user){
+	User.find({_id: req.params.user_id}, function(err,user){
 		if(err) res.json({ err: err })
 		res.json(user)
+	})
+}
+
+function destroy(req, res){
+	User.findOneAndRemove({_id: req.params.user_id}, function(err, user){
+		if(err) res.send(err)
+		res.json({success: true, message: "User " + user.name + " deleted!"})
 	})
 }
 
@@ -38,8 +45,9 @@ function signIn(req,res){
 }
 
 module.exports = {
-	createUser: create,
-	showAll: index,
-	showUser: show,
-	signIn: signIn
+	create: create,
+	index: index,
+	show: show,
+	signIn: signIn,
+	destroy: destroy
 }
