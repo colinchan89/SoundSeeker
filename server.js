@@ -60,30 +60,25 @@ app.get('/', function(req,res){
     console.log('Recieved ' + data.search.total_items + ' events')
     var events = data.search.events.event
 
-
-    soundcloud.get('/tracks', {tags: events[0].title}, function(err, track) {
+    soundcloud.get('/tracks', {tags: events[1].title}, function(err, track) {
       if (err) throw err
       else console.log('success')
-      res.json(track)
+      // res.json(track)
+      track.forEach(function(n){
+        console.log(n.permalink_url)
+      })
     })
 
-
-    // res.json(events)
-    for(var i=0;i<events.length;i++){
-      var artists = events[i].performers.performer
-      // var eventsWithPerformers = events.filter(function(el){
-      //   return el
-      // })
+    events.forEach(function(n){
+      var artists = n.performers.performer
       if(artists.length > 1){
-        for(var j=0;j<artists.length;j++){
-          console.log(events[i].performers.performer[j].name)
-        }
+        artists.forEach(function(n){
+          console.log(n.name)
+        })
       }
-      else {
-        console.log(artists.name)
-      }
-    }
-
+      console.log(artists.name)
+    })
+    // res.json(events)
   })
 })
 
