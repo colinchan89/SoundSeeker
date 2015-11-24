@@ -60,7 +60,7 @@ app.get('/', function(req,res){
       }
       console.log(artists.name)
     })
-    // res.json(events)
+    res.json(events)
   })
 })
 
