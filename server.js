@@ -13,9 +13,9 @@ var express = require('express'),
     userRoutes = require('./routes/users.js'),
     soundcloud = require('node-soundcloud'),
     eventful = require('eventful-node'),
-    client = new eventful.Client('tX9rVSJRM96LsCtP');
+    client = new eventful.Client('tX9rVSJRM96LsCtP'),
 		port = process.env.PORT || 3000,
-		apiRouter = require('./routes/api_routes.js'),
+		apiRouter = require('./routes/api_routes.js')
 
 
 //connect to db

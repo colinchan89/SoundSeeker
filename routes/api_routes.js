@@ -1,6 +1,7 @@
 var usersController = require('../controllers/users_controller.js'),
 		express = require('express'),
-		apiRouter = express.Router()
+		apiRouter = express.Router(),
+		soundcloudRoutes = require('./sc.js')
 
 apiRouter.route('/users')
 	.post(usersController.create)
@@ -12,5 +13,7 @@ apiRouter.route('/users/:user_id')
 
 apiRouter.route('/signin')
 	.post(usersController.signIn)
+
+apiRouter.use('/', soundcloudRoutes)
 
 module.exports = apiRouter
