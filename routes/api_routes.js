@@ -1,12 +1,14 @@
 var usersController = require('../controllers/users_controller.js'),
-					apiRouter = require('express').Router()
+		express = require('express'),
+		apiRouter = express.Router()
 
 apiRouter.route('/users')
-	.post(usersController.createUser)
-	.get(usersController.showAll)
+	.post(usersController.create)
+	.get(usersController.index)
 
-apiRouter.route('/users/:email')
-	.get(usersController.showUser)
+apiRouter.route('/users/:user_id')
+	.get(usersController.show)
+	.delete(usersController.destroy)
 
 apiRouter.route('/signin')
 	.post(usersController.signIn)
