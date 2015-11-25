@@ -15,7 +15,8 @@ var express = require('express'),
     eventful = require('eventful-node'),
     client = new eventful.Client('tX9rVSJRM96LsCtP'),
 		port = process.env.PORT || 3000,
-		apiRouter = require('./routes/api_routes.js')
+		apiRouter = require('./routes/api_routes.js'),
+    request = require('request')
 
 
 //connect to db
@@ -67,6 +68,15 @@ app.use(flash())
 //root route
 app.get('/', function(req,res){
     res.render('index')
+})
+
+app.get('/events/:id', function(req,res){
+  // res.render('show')
+  request('http://api.eventful.com/json/events/get?id=' + req.params.id + '&app_key=tX9rVSJRM96LsCtP', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.render('show', {event: JSON.parse(body)}) // Show the HTML for the Google homepage.
+    }
+  })
 })
 
 app.use(userRoutes)

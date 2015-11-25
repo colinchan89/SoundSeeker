@@ -2,7 +2,8 @@ var express = require('express'),
 		soundcloud = express.Router(),
 		SC = require('node-soundcloud'),
 		eventful = require('eventful-node'),
-    client = new eventful.Client('tX9rVSJRM96LsCtP')
+    client = new eventful.Client('tX9rVSJRM96LsCtP'),
+		request = require('request')
 
 // Initialize client
 SC.init({
@@ -42,8 +43,20 @@ soundcloud.get('/events/:zip', function(req,res){
 	})
 })
 
-soundcloud.get('/:id', function(req,res){
-
+soundcloud.get('/events/single/:id', function(req,res){
+// sample get for event:
+// 'http://api.eventful.com/json/events/get?id='req.params.id'&app_key=tX9rVSJRM96LsCtP'
+	console.log("====SC HIT=====", req.params.id)
+	request('http://api.eventful.com/json/events/get?id=' + req.params.id + '&app_key=tX9rVSJRM96LsCtP', function (error, response, body) {
+	if (!error && response.statusCode == 200) {
+		res.json(JSON.parse(body)) // Show the HTML for the Google homepage.
+	}
+	})
 })
+
+
+// soundcloud.get('/:id', function(req,res){
+//
+// })
 
 module.exports = soundcloud
