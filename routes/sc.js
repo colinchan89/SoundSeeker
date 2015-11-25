@@ -13,10 +13,10 @@ SC.init({
 })
 
 
-soundcloud.get('/events', function(req,res){
-	client.searchEvents({ keywords: 'concerts', location: '90404', within: 25, date: 'This Week', sort_order: 'popularity'}, function(err, data){
+soundcloud.get('/events/:zip', function(req,res){
+	client.searchEvents({ keywords: 'concerts', location: req.params.zip, within: 20, date: 'This Week', sort_order: 'popularity'}, function(err, data){
 		if(err) throw err
-		console.log('Recieved ' + data.search.total_items + ' events')
+		// console.log('Received ' + data.search.total_items + ' events')
 		var events = data.search.events.event
 
 		// soundcloud.get('/tracks', {tags: events[1].title}, function(err, track) {
@@ -28,17 +28,22 @@ soundcloud.get('/events', function(req,res){
 		// 	})
 		// })
 
-		events.forEach(function(n){
-			var artists = n.performers.performer
-			if(artists.length > 1){
-				artists.forEach(function(n){
-					console.log(n.name)
-				})
-			}
-			console.log(artists.name)
-		})
+		// events.forEach(function(evt){
+		// 	var artists = evt.performers.performer
+		// 	console.log(artists)
+		// 	if(artists.length > 1){
+		// 		artists.forEach(function(a){
+		// 			console.log(a.name)
+		// 		})
+		// 	}
+		// 	console.log(evt.performers.performer.name)
+		// })
 		res.json(events)
 	})
+})
+
+soundcloud.get('/:id', function(req,res){
+
 })
 
 module.exports = soundcloud
