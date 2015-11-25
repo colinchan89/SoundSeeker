@@ -42,6 +42,11 @@ soundcloud.get('/events/:zip', function(req,res){
 	})
 })
 
+soundcloud.get('/events/single/:id', function(req,res){
+// sample get for event:
+// 'http://api.eventful.com/rest/events/get?id=E0-001-079142837-2@2015112822&app_key=tX9rVSJRM96LsCtP'
+})
+
 soundcloud.get('/:id', function(req,res){
 
 })
