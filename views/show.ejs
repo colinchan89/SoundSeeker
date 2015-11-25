@@ -1,0 +1,35 @@
+
+<script type="text/javascript" href="../soundcloud.player.api.js"></script>
+<script type="text/javascript">
+	SC.init({
+		id: '7ce0c4a7238f05f3fada1cdcff5b489c',
+		secret: 'a2039f8373bab2514ae7e6f796e95033',
+		uri: 'http://localhost:3000/',
+		accessToken: 'https://api.soundcloud.com/oauth2/token'
+	})
+</script>
+
+<h1><%= event.title %></h1>
+<h3>Date & Time: <%= event.start_time %></h3>
+<h3>Venue: <%= event.venue_name %></h3>
+<h3>Performers:
+	<% if(event.performers){ %>
+		<% if(event.performers.performer.length > 1){ %>
+			<% event.performers.performer.forEach(function(n){ %>
+			 <li><%= n.name %></li>
+		<% })} else { %>
+			<li><%= event.performers.performer.name %></li>
+	<% }} else{ %> No Listed Performers
+	<% } %>
+</h3>
+<h3>Price: <%= event.price %></h3>
+<% if(event.links) { %>
+	<h3><a href="<%= event.links.link[0].url %>">Tickets</a></h3>
+<% } else { %>
+	<h3>No Online Ticket Source</h3>
+<% } %>
+<object height="81" width="100%" id="myPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+  <param name="movie" value="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=myPlayer"></param>
+  <param name="allowscriptaccess" value="always"></param>
+  <embed allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fsoundcloud.com%2Fmatas%2Fhobnotropic&enable_api=true&object_id=myPlayer" type="application/x-shockwave-flash" width="100%" name="myPlayer"></embed>
+</object>

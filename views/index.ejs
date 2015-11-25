@@ -76,7 +76,7 @@
 
 <script type="text/javascript">
   $('#showResults').on('click',function(evt){
-    $('.event-results').val('')
+    $('.event-results').empty()
     var query = '/api/events/' + $('#zipcode').val() + '/'
     $.ajax({
 			url: query,
@@ -86,17 +86,27 @@
           var eventSpan = '<span class="event-name">' + e.title + '</span>'
           var dateSpan = '<span class="event-date">' + e.start_time + '</span>'
           var venueSpan = '<span class="event-venue">' + e.venue_name + '</span>'
-          var showDetails = '<a id="'+ e.$.id + '" class="show-details" href="/' + e.$.id + '">Show</a>'
+          // var showDetails = '<a id="'+ e.$.id + '" class="show-details" href="http://api.eventful.com/json/events/get?id=' + e.$.id + '&app_key=tX9rVSJRM96LsCtP">Show</a>'
+          var showDetails = '<a id="'+ e.$.id + '" class="show-details" href="/events/' + e.$.id + '" ">Show</a>'
           var li = '<li>' + eventSpan + ' | Date: ' + dateSpan + ' | ' + venueSpan + ' ' + showDetails + '</li>'
           $('.event-results').append(li);
         })
         $('.show-details').on('click', function(evt){
           console.log(evt.target.id)
+          $.ajax({
+            url: 'api/events/single/' + evt.target.id + '/',
+            method: 'GET',
+            success: function(data){
+              console.log(data)
+            }
+          })
           // $.ajax({
-          //   url: '/' + evt.target.id,
+          //   url: 'http://api.eventful.com/json/events/get?id=' + evt.target.id + '&app_key=tX9rVSJRM96LsCtP',
+          //   dataType: 'jsonp',
           //   method: 'GET',
           //   success: function(data){
           //     console.log(data)
+          //
           //   }
           // })
         })
