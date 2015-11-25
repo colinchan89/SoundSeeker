@@ -19,16 +19,6 @@ soundcloud.get('/events/:zip', function(req,res){
 		if(err) throw err
 		// console.log('Received ' + data.search.total_items + ' events')
 		var events = data.search.events.event
-
-		// soundcloud.get('/tracks', {tags: events[1].title}, function(err, track) {
-		// 	if (err) throw err
-		// 	else console.log('success')
-		// 	// res.json(track)
-		// 	track.forEach(function(n){
-		// 		console.log(n.permalink_url)
-		// 	})
-		// })
-
 		// events.forEach(function(evt){
 		// 	var artists = evt.performers.performer
 		// 	console.log(artists)
@@ -43,20 +33,38 @@ soundcloud.get('/events/:zip', function(req,res){
 	})
 })
 
+
 soundcloud.get('/events/single/:id', function(req,res){
 // sample get for event:
 // 'http://api.eventful.com/json/events/get?id='req.params.id'&app_key=tX9rVSJRM96LsCtP'
-	console.log("====SC HIT=====", req.params.id)
 	request('http://api.eventful.com/json/events/get?id=' + req.params.id + '&app_key=tX9rVSJRM96LsCtP', function (error, response, body) {
-	if (!error && response.statusCode == 200) {
-		res.json(JSON.parse(body)) // Show the HTML for the Google homepage.
-	}
+		if (!error && response.statusCode == 200) {
+			var performers = []
+			// var artists = JSON.parse(body).performers.performer
+			res.json(JSON.parse(body)) // Parse JSON Object returned from eventful
+			if(JSON.parse(body).performers){
+				if(JSON.parse(body).performers.performer.length > 1){
+					JSON.parse(body).performers.performer.forEach(function(a){
+						performers.push(a.name)
+					})
+				}
+				else {
+					performers.push(artists.name)
+				}
+			}
+			console.log(performers)
+			SC.get('/tracks', {tags: performers}, function(err, track) {
+				if (err) throw err
+				else console.log('success')
+
+				// res.json(track)
+				track.forEach(function(n){
+					console.log(n.permalink_url)
+				})
+			})
+		}
 	})
 })
 
-
-// soundcloud.get('/:id', function(req,res){
-//
-// })
 
 module.exports = soundcloud
