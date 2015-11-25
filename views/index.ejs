@@ -1,5 +1,46 @@
+<style>
+  .event-results {
+    text-align: left;
+  }
+</style>
+
 <div class="text-center col-md-8 col-md-offset-2">
     <h1><span class="fa fa-lock"></span>SoundSeeker</h1>
     <h3>Support Local Music</h3>
-    <button>Submit</button>
+    <input id="zipcode" type="text">
+    <button id="showResults">Submit</button>
+    <!-- <div class="container"> -->
+      <ul class="event-results"></ul>
+    <!-- </div> -->
 </div>
+
+<script type="text/javascript">
+  $('#showResults').on('click',function(evt){
+    $('.event-results').val('')
+    var query = '/api/events/' + $('#zipcode').val() + '/'
+    $.ajax({
+			url: query,
+			method: 'GET',
+			success: function(data){
+        data.forEach(function(e){
+          var eventSpan = '<span class="event-name">' + e.title + '</span>'
+          var dateSpan = '<span class="event-date">' + e.start_time + '</span>'
+          var venueSpan = '<span class="event-venue">' + e.venue_name + '</span>'
+          var showDetails = '<a id="'+ e.$.id + '" class="show-details" href="/' + e.$.id + '">Show</a>'
+          var li = '<li>' + eventSpan + ' | Date: ' + dateSpan + ' | ' + venueSpan + ' ' + showDetails + '</li>'
+          $('.event-results').append(li);
+        })
+        $('.show-details').on('click', function(evt){
+          console.log(evt.target.id)
+          // $.ajax({
+          //   url: '/' + evt.target.id,
+          //   method: 'GET',
+          //   success: function(data){
+          //     console.log(data)
+          //   }
+          // })
+        })
+      }
+    })
+  })
+</script>

@@ -11,9 +11,6 @@ apiRouter.route('/users/:user_id')
 	.get(usersController.show)
 	.delete(usersController.destroy)
 
-apiRouter.route('/signin')
-	.post(usersController.signIn)
-
 apiRouter.use('/', soundcloudRoutes)
 
 module.exports = apiRouter
