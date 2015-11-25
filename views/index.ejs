@@ -76,7 +76,7 @@
 
 <script type="text/javascript">
   $('#showResults').on('click',function(evt){
-    $('.event-results').val('')
+    $('.event-results').empty()
     var query = '/api/events/' + $('#zipcode').val() + '/'
     $.ajax({
 			url: query,
