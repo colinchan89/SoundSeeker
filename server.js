@@ -20,7 +20,7 @@ var express = require('express'),
 
 
 //connect to db
-mongoose.connect('mongodb://localhost/soundseeker', function(err){
+mongoose.connect('mongodb://soundseeker:sound1@ds059524.mongolab.com:59524/soundseeker', function(err){
 	if(err) return console.log('Cannot connect :(')
 	console.log('Connected to MongoDB!')
 })
