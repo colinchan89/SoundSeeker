@@ -49,19 +49,19 @@ soundcloud.get('/events/single/:id', function(req,res){
 					})
 				}
 				else {
-					performers.push(artists.name)
+					performers.push(JSON.parse(body).performers.performer.name)
 				}
 			}
 			console.log(performers)
-			SC.get('/tracks', {tags: performers}, function(err, track) {
-				if (err) throw err
-				else console.log('success')
-
-				// res.json(track)
-				track.forEach(function(n){
-					console.log(n.permalink_url)
-				})
-			})
+			// SC.get('/tracks', {tags: performers}, function(err, track) {
+			// 	if (err) throw err
+			// 	else console.log('success')
+			// 	console.log(track[0].id)
+			// 	res.json(track)
+			// 	track.forEach(function(n){
+			// 		console.log(n.permalink_url)
+			// 	})
+			// })
 		}
 	})
 })
