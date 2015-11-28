@@ -23,6 +23,10 @@
     "node-soundcloud": "0.0.4",
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "engines": {
+    "node": "4.1.1",
     "passport-local": "^1.0.0",
     "request": "^2.67.0"
   }
