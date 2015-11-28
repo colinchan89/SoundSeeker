@@ -89,15 +89,12 @@ app.get('/events/:id', function(req,res){
       SC.get('/tracks', {tags: performers}, function(err, track) {
         if (err) throw err
         else console.log('success')
-        console.log(typeof track[0].id)
-        // res.json(track[0].id)
-        s = track[0].id
+        song = track[0].id
         // track.forEach(function(n){
         // 	console.log(n.permalink_url)
         // })
-        res.render('show', {event: JSON.parse(body), songId: s}) // Show the HTML for the Google homepage.
+        res.render('show', {event: JSON.parse(body), songId: song}) // Show the HTML for the Google homepage.
       })
-
     }
   })
 })
