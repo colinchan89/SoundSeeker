@@ -4,7 +4,6 @@ var express = require('express'),
 		eventful = require('eventful-node'),
     client = new eventful.Client('tX9rVSJRM96LsCtP'),
 		request = require('request')
-
 // Initialize client
 SC.init({
 	id: '7ce0c4a7238f05f3fada1cdcff5b489c',
@@ -12,7 +11,6 @@ SC.init({
   uri: 'http://localhost:3000/',
 	accessToken: 'https://api.soundcloud.com/oauth2/token'
 })
-
 
 soundcloud.get('/events/:zip', function(req,res){
 	client.searchEvents({ keywords: 'concerts', location: req.params.zip, within: 20, date: 'This Week', sort_order: 'popularity'}, function(err, data){

@@ -2,16 +2,17 @@
 <html>
 <head>
     <title>SoundSeeker</title>
-    <link rel="stylesheet" href="/css/style.css" media="screen" title="no title" charset="utf-8">
+    <!-- <link rel="stylesheet" href="/css/style.css" media="screen" title="no title" charset="utf-8"> -->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <style>
       .navbar-default {
         font-size: 18px;
-        background-color: rgba(0,0,0,0);
+        background-color: rgba(255,255,255,0.5);
         border: none;
         border-radius: 0px;
+        margin-bottom: -20px;
       }
       .navbar-brand {
         font-size: 18px;
@@ -34,12 +35,15 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          <% if(!isLoggedIn){ %>
           <li><a href="/signup">Sign Up!</a></li>
           <li><a href="/login">Log In!</a></li>
+          <% } else { %>
+          <li><a href="/profile">Profile</a></li>
           <li><a href="/logout">Log Out!</a></li>
+          <% } %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/profile">My Profile</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

@@ -37,24 +37,13 @@ SC.init({
   accessToken: 'https://api.soundcloud.com/oauth2/token'
 })
 
-//root route
-app.get('/', function(req,res){
 
-	res.render('index')
-
-})
-
-//import routes
-app.use('/api', apiRouter)
-
-//Ted added for passport
 
 // middleware
 app.use(logger('dev'))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
-
 
 app.use(session({
     secret: "boomchakalaka",
@@ -65,10 +54,22 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
+app.use(function(req,res,next){
+    app.locals.isLoggedIn = req.isAuthenticated()
+    if(req.user){
+        app.locals.currentUser = req.user
+    }
+    next()
+})
 //root route
 app.get('/', function(req,res){
-    res.render('index')
+	res.render('index')
 })
+
+//import routes
+app.use('/api', apiRouter)
+
+//Ted added for passport
 
 app.get('/events/:id', function(req,res){
   // res.render('show')
@@ -87,13 +88,20 @@ app.get('/events/:id', function(req,res){
         }
       }
       SC.get('/tracks', {tags: performers}, function(err, track) {
-        if (err) throw err
-        else console.log('success')
-        song = track[0].id
-        // track.forEach(function(n){
-        // 	console.log(n.permalink_url)
-        // })
-        res.render('show', {event: JSON.parse(body), songId: song}) // Show the HTML for the Google homepage.
+        if(track){
+          if (err) throw err
+          console.log('success')
+          song = track[0].id
+          console.log(song)
+          // track.forEach(function(n){
+          // 	console.log(n.permalink_url)
+          // })
+          res.render('show', {event: JSON.parse(body), songId: song})
+        }
+        else{
+          console.log('failure')
+          res.render('show', {event: JSON.parse(body), songId: null})
+        }
       })
     }
   })
