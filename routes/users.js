@@ -2,6 +2,11 @@ var	express = require('express'),
 		passport = require('passport'),
 		userRouter = express.Router()
 
+function isLoggedIn(req,res,next) {
+	if(req.isAuthenticated()) return next()
+	res.redirect('/')
+}
+
 userRouter.route('/login')
 	.get(function(req,res){
 		res.render('login', {message: req.flash('loginMessage')})
@@ -38,10 +43,5 @@ userRouter.get('/logout', function(req,res){
 	req.logout()
 	res.redirect('/')
 })
-
-function isLoggedIn(req,res,next) {
-	if(req.isAuthenticated()) return next()
-	res.redirect('/')
-}
 
 module.exports = userRouter
