@@ -11,7 +11,7 @@ var express = require('express'),
 	  passport = require('passport'),
     passportConfig = require('./config/passport.js').passport,
     userRoutes = require('./routes/users.js'),
-    soundcloud = require('node-soundcloud'),
+    SC = require('node-soundcloud'),
     eventful = require('eventful-node'),
     client = new eventful.Client('tX9rVSJRM96LsCtP'),
 		port = process.env.PORT || 3000,
@@ -30,7 +30,7 @@ app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 //soundcloud
 ////init client
-soundcloud.init({
+SC.init({
   id: '7ce0c4a7238f05f3fada1cdcff5b489c',
   secret: 'a2039f8373bab2514ae7e6f796e95033',
   uri: 'http://localhost:3000/',
@@ -72,9 +72,32 @@ app.get('/', function(req,res){
 
 app.get('/events/:id', function(req,res){
   // res.render('show')
-  request('http://api.eventful.com/json/events/get?id=' + req.params.id + '&app_key=tX9rVSJRM96LsCtP', function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      res.render('show', {event: JSON.parse(body)}) // Show the HTML for the Google homepage.
+  request('http://api.eventful.com/json/events/get?id=' + req.params.id + '&app_key=tX9rVSJRM96LsCtP', function (err, response, body) {
+    if (!err && response.statusCode == 200) {
+      var s = null;
+      var performers = [];
+      if(JSON.parse(body).performers){
+        if(JSON.parse(body).performers.performer.length > 1){
+          JSON.parse(body).performers.performer.forEach(function(a){
+            performers.push(a.name)
+          })
+        }
+        else {
+          performers.push(JSON.parse(body).performers.performer.name)
+        }
+      }
+      SC.get('/tracks', {tags: performers}, function(err, track) {
+        if (err) throw err
+        else console.log('success')
+        console.log(typeof track[0].id)
+        // res.json(track[0].id)
+        s = track[0].id
+        // track.forEach(function(n){
+        // 	console.log(n.permalink_url)
+        // })
+        res.render('show', {event: JSON.parse(body), songId: s}) // Show the HTML for the Google homepage.
+      })
+
     }
   })
 })
