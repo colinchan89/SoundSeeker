@@ -100,7 +100,7 @@ app.get('/events/:id', function(req,res){
           song1 = track[0].id
           song2 = track[1].id
           song3 = track[2].id
-          console.log(song1)
+          // console.log(song1)
           // track.forEach(function(n){
           // 	console.log(n.permalink_url)
           // })
