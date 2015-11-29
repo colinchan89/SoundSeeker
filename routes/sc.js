@@ -13,7 +13,7 @@ SC.init({
 })
 
 soundcloud.get('/events/:zip', function(req,res){
-	client.searchEvents({ keywords: 'concerts', location: req.params.zip, within: 20, date: 'This Week', sort_order: 'popularity'}, function(err, data){
+	client.searchEvents({ keywords: 'concerts', location: req.params.zip, within: 10, date: 'This Week', sort_order: 'popularity'}, function(err, data){
 		if(err) throw err
 		// console.log('Received ' + data.search.total_items + ' events')
 		var events = data.search.events.event
