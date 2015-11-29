@@ -97,12 +97,14 @@ app.get('/events/:id', function(req,res){
         if(track){
           if (err) throw err
           console.log('success')
-          song = track[0].id
-          console.log(song)
+          song1 = track[0].id
+          song2 = track[1].id
+          song3 = track[2].id
+          console.log(song1)
           // track.forEach(function(n){
           // 	console.log(n.permalink_url)
           // })
-          res.render('show', {event: JSON.parse(body), songId: song})
+          res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3})
         }
         else {
           console.log('failure')
