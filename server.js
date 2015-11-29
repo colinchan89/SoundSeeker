@@ -61,9 +61,15 @@ app.use(function(req,res,next){
     }
     next()
 })
-//root route
+//basic routes
 app.get('/', function(req,res){
 	res.render('index')
+})
+app.get('/about', function(req,res){
+	res.render('about')
+})
+app.get('/contact', function(req,res){
+	res.render('contact')
 })
 
 //import routes
@@ -87,7 +93,7 @@ app.get('/events/:id', function(req,res){
           performers.push(JSON.parse(body).performers.performer.name)
         }
       }
-      SC.get('/tracks', {tags: performers}, function(err, track) {
+      SC.get('/tracks', {q: performers}, function(err, track) {
         if(track){
           if (err) throw err
           console.log('success')
@@ -98,7 +104,7 @@ app.get('/events/:id', function(req,res){
           // })
           res.render('show', {event: JSON.parse(body), songId: song})
         }
-        else{
+        else {
           console.log('failure')
           res.render('show', {event: JSON.parse(body), songId: null})
         }
