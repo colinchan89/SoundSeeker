@@ -1,9 +1,16 @@
 
+<<<<<<< HEAD
+<h2><%= event.title %></h2>
+<h4>Date & Time: <%= event.start_time %></h4>
+<h4>Venue: <%= event.venue_name %></h4>
+<h4>Performers:
+=======
 <h1><%= event.title %></h1>
 <h3>Date & Time: <%= event.start_time %></h3>
 <h3>Venue: <%= event.venue_name %></h3>
 <h3>Location: <%= event.city %>, <%= event.region %>, <%= event.country_abbr %></h3>
 <h3>Performers:
+>>>>>>> cf592671efcde6fb8c09466971d73f3dbc9db305
 	<% if(event.performers){ %>
 		<% if(event.performers.performer.length > 1){ %>
 			<% event.performers.performer.forEach(function(n){ %>
@@ -12,17 +19,25 @@
 			<li><%= event.performers.performer.name %></li>
 	<% }} else{ %> No Listed Performers
 	<% } %>
-</h3>
-<h3>Price: <%= event.price %></h3>
+</h4>
+<h5>Price: <%= event.price %></h5>
 <% if(event.links) { %>
-	<h3><a href="<%= event.links.link[0].url %>">Tickets</a></h3>
+	<h5><a href="<%= event.links.link[0].url %>">Tickets</a></h5>
 <% } else { %>
-	<h3>No Online Ticket Source</h3>
+	<h5>No Online Ticket Source</h5>
 <% } %>
 <footer>
 <% if(event.performers && songId){ %>
 	<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/<%= songId %>&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
 <% } else { %>
-	<h3> Unable To Generate Song For This Performer <h3>
+	<h5> Unable To Generate Song For This Performer <h5>
 <% } %>
 </footer>
+
+<style>
+	body {
+		padding-top: 50px;
+		text-align: center;
+		list-style: none;
+	}
+</style>
