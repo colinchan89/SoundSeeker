@@ -26,3 +26,7 @@ miles and 7 days. You can further inspect the concert on a unique show page for
 the event that uses Eventful's API to provide the date & time, additional
 performers, the price, a link to buy tickets and an embedded SoundCloud player
 with the artists most popular songs.
+
+### What's Next
+* More User Features: Improved profile page, bookmarks, etc.
+* Improved Search: Adjustable search radius. Random Show option.
