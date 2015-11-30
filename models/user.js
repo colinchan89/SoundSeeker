@@ -7,13 +7,15 @@ var mongoose = require('mongoose'),
 			name: String,
 			email: {type: String, require: true},
 			password: {type: String, require: true},
-			zip: String
+			zip: String,
+			bookmarks: Array
  },
 		facebook: {
         id: String,
         name: String,
         token: String,
-        email: String
+        email: String,
+				bookmarks: Array
 			}
     })
 

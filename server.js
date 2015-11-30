@@ -100,11 +100,14 @@ app.get('/events/:id', function(req,res){
           song1 = track[0].id
           song2 = track[1].id
           song3 = track[2].id
+          bookmarkURL = req.url
+          // console.log(req.url)
+          // console.log(user.local.name)
           // console.log(song1)
           // track.forEach(function(n){
           // 	console.log(n.permalink_url)
           // })
-          res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3})
+          res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3, bookmarkURL: bookmarkURL})
         }
         else {
           console.log('failure')
