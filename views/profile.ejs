@@ -18,11 +18,19 @@
                 <strong>Name</strong>: <%= user.local.name || user.facebook.name %><br>
                 <strong>Zip</strong>: <%= user.local.zip %><br>
                 <strong>Bookmarks</strong>: <%= user.local.bookmarks[0] %><br>
-                <strong>id</strong>: <%= user._id %><br>
+                <!-- <strong>id</strong>: <%= user._id %><br> -->
                 <strong>email</strong>: <%= user.local.email || user.facebook.email %><br>
-                <strong>password</strong>: <%= user.local.password || user.facebook.token%>
+                <!-- <strong>password</strong>: <%= user.local.password || user.facebook.token%> -->
             </p>
+
+            <img src="http://hothardware.com/newsimages/Item9668/DJ-Hero.jpg">
 
         </div>
     </div>
 </div>
+
+<style media="screen">
+  .row{
+    text-align: center;
+  }
+</style>
