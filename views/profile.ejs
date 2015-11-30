@@ -16,6 +16,8 @@
         <% } %>
             <p>
                 <strong>Name</strong>: <%= user.local.name || user.facebook.name %><br>
+                <strong>Zip</strong>: <%= user.local.zip %><br>
+                <strong>Bookmarks</strong>: <%= user.local.bookmarks[0] %><br>
                 <strong>id</strong>: <%= user._id %><br>
                 <strong>email</strong>: <%= user.local.email || user.facebook.email %><br>
                 <strong>password</strong>: <%= user.local.password || user.facebook.token%>
