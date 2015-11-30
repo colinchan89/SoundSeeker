@@ -1,11 +1,12 @@
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
-    <ol class="carousel-indicators">
+    <!-- <ol class="carousel-indicators">
       <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
       <li data-target="#carousel-example-generic" data-slide-to="1"></li>
       <li data-target="#carousel-example-generic" data-slide-to="2"></li>
       <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-    </ol>
+      <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+    </ol> -->
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
@@ -122,8 +123,11 @@
 </style>
 
 <script type="text/javascript">
+  //submit button
   $('#showResults').on('click',function(evt){
+    //empty the list in case of additional request
     $('.event-results').empty()
+    //set variable for api call uri
     var query = '/api/events/' + $('#zipcode').val() + '/'
     $.ajax({
 			url: query,
@@ -136,7 +140,8 @@
           // var showDetails = '<a id="'+ e.$.id + '" class="show-details" href="http://api.eventful.com/json/events/get?id=' + e.$.id + '&app_key=tX9rVSJRM96LsCtP">Show</a>'
           var showDetails = '<a id="'+ e.$.id + '" class="show-details" href="/events/' + e.$.id + '" ">Show</a>'
           var li = '<li>' + eventSpan + ' | Date: ' + dateSpan + ' | ' + venueSpan + ' ' + showDetails + '</li>'
-          $('.event-results').append(li);
+          $('.event-results').append(li)
+          console.log(e.$.id)
         })
         $('.show-details').on('click', function(evt){
           console.log(evt.target.id)
@@ -154,6 +159,14 @@
           //   success: function(data){
           //     console.log(data)
           //
+          //   }
+          // })
+          // $.ajax({
+          //   url: '/api/users/',
+          //   method: 'GET',
+          //   success: function(data){
+          //     console.log(data)
+          //     console.log(res)
           //   }
           // })
         })
