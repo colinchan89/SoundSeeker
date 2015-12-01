@@ -18,7 +18,6 @@ var express = require('express'),
     apiRouter = require('./routes/api_routes.js'),
     request = require('request')
 
-
 //connect to db
 mongoose.connect('mongodb://soundseeker:sound1@ds059524.mongolab.com:59524/soundseeker', function(err){
   if(err) return console.log('Cannot connect :(')
@@ -28,16 +27,14 @@ mongoose.connect('mongodb://soundseeker:sound1@ds059524.mongolab.com:59524/sound
 // ejs configuration
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
-//soundcloud
-////init client
+
+//init soundcloud client
 SC.init({
   id: '7ce0c4a7238f05f3fada1cdcff5b489c',
   secret: 'a2039f8373bab2514ae7e6f796e95033',
   uri: 'http://localhost:3000/',
   accessToken: 'https://api.soundcloud.com/oauth2/token'
 })
-
-
 
 // middleware
 app.use(logger('dev'))
@@ -46,8 +43,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 app.use(session({
-    secret: "boomchakalaka",
-    cookie:{_expires : 60000000}
+  secret: "boomchakalaka",
+  cookie:{_expires : 60000000}
 }))
 
 app.use(passport.initialize())
@@ -55,11 +52,11 @@ app.use(passport.session())
 app.use(flash())
 
 app.use(function(req,res,next){
-    app.locals.isLoggedIn = req.isAuthenticated()
-    if(req.user){
-        app.locals.currentUser = req.user
-    }
-    next()
+  app.locals.isLoggedIn = req.isAuthenticated()
+  if(req.user){
+    app.locals.currentUser = req.user
+  }
+  next()
 })
 //basic routes
 app.get('/', function(req,res){
@@ -121,5 +118,5 @@ app.get('/events/:id', function(req,res){
 app.use(userRoutes)
 
 app.listen(port, function(){
-    console.log("Server running on port", port)
+  console.log("Server running on port", port)
 })
