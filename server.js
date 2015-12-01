@@ -51,6 +51,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
+//middleware function to check if there is a current user
 app.use(function(req,res,next){
   app.locals.isLoggedIn = req.isAuthenticated()
   if(req.user){
@@ -58,6 +59,7 @@ app.use(function(req,res,next){
   }
   next()
 })
+
 //basic routes
 app.get('/', function(req,res){
   res.render('index')
@@ -69,17 +71,20 @@ app.get('/contact', function(req,res){
   res.render('contact')
 })
 
-//import routes
+//import api routes
 app.use('/api', apiRouter)
 
-//Ted added for passport
+//routes for passport
+app.use(userRoutes)
 
+//api request to eventful to create show page for individual concert
 app.get('/events/:id', function(req,res){
-  // res.render('show')
+  //use request npm package to retrieve JSON data for local DB
   request('http://api.eventful.com/json/events/get?id=' + req.params.id + '&app_key=tX9rVSJRM96LsCtP', function (err, response, body) {
     if (!err && response.statusCode == 200) {
-      var s = null;
+      //create an array for individual performers
       var performers = [];
+      //some performers are contained in arrays so we need to check for that
       if(JSON.parse(body).performers){
         if(JSON.parse(body).performers.performer.length > 1){
           JSON.parse(body).performers.performer.forEach(function(a){
@@ -90,24 +95,22 @@ app.get('/events/:id', function(req,res){
           performers.push(JSON.parse(body).performers.performer.name)
         }
       }
+      //built in node-soundcloud method that searches using created performer array
       SC.get('/tracks', {q: performers}, function(err, track) {
         if(track){
           if (err) throw err
           console.log('success')
+          //retrieve soundcloud id for 3 songs for embedded soundcloud player on show page
           song1 = track[0].id
           song2 = track[1].id
           song3 = track[2].id
+          //retrieve url of show for saving purposes
           bookmarkURL = req.url
-          // console.log(req.url)
-          // console.log(user.local.name)
-          // console.log(song1)
-          // track.forEach(function(n){
-          // 	console.log(n.permalink_url)
-          // })
           res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3, bookmarkURL: bookmarkURL})
         }
         else {
           console.log('failure')
+          //in the event the soundcloud query returns no results
           res.render('show', {event: JSON.parse(body), songId: null})
         }
       })
@@ -115,8 +118,7 @@ app.get('/events/:id', function(req,res){
   })
 })
 
-app.use(userRoutes)
-
+//set up server
 app.listen(port, function(){
   console.log("Server running on port", port)
 })
