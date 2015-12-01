@@ -21,8 +21,8 @@ var express = require('express'),
 
 //connect to db
 mongoose.connect('mongodb://soundseeker:sound1@ds059524.mongolab.com:59524/soundseeker', function(err){
-	if(err) return console.log('Cannot connect :(')
-	console.log('Connected to MongoDB!')
+  if(err) return console.log('Cannot connect :(')
+  console.log('Connected to MongoDB!')
 })
 
 // ejs configuration
@@ -63,13 +63,13 @@ app.use(function(req,res,next){
 })
 //basic routes
 app.get('/', function(req,res){
-	res.render('index')
+  res.render('index')
 })
 app.get('/about', function(req,res){
-	res.render('about')
+  res.render('about')
 })
 app.get('/contact', function(req,res){
-	res.render('contact')
+  res.render('contact')
 })
 
 //import routes

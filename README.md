@@ -2,6 +2,7 @@
 SoundSeeker is a web app that uses the Eventful & SoundCloud APIs to provide the
 user with a list of local concerts occurring that week (plus a link to buy
 tickets) with an embedded SoundCloud player to preview the artist's top hits!
+Heroku link: https://hidden-earth-8076.herokuapp.com/
 
 ### Technologies Used:
 * Node version 4.1.1
