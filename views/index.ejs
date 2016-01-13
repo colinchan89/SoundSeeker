@@ -1,14 +1,5 @@
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <!-- <ol class="carousel-indicators">
-      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="4"></li>
-    </ol> -->
 
-    <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
         <img src="http://i.picresize.com/images/2015/11/28/OFujy.jpg" alt="image of concert">
@@ -35,13 +26,19 @@
   <div class="centerstuff">
 
     <div class="mainPitch">
-        <h1><span class="fa fa-lock"></span>SoundSeeker</h1>
-        <h3 style="font-weight:200;font-size:40px;margin-top:-10px">Support Local Music</h3>
-        <input id="zipcode" type="text" placeholder="Enter Location"></br>
-        <button id="showResults">Submit</button>
-          <!-- <div class="container"> -->
-          <ul class="event-results"></ul>
-          <!-- </div> -->
+      <h1><span class="fa fa-lock"></span>SoundSeeker</h1>
+      <h3 style="font-weight:200;font-size:40px;margin-top:-10px">Support Local Music</h3>
+      <div class="form-group">
+        <div class="col-md-12">
+          <input type="text" class="form-control" id="location" placeholder="Enter Location">
+        </div>
+        <div class="col-md-12">
+          <label for="radius">Search Radius (in miles)</label>
+          <input type="number" class="form-control" min="1" max="20" step="1" value="10" id="radius">
+        </div>
+      </div>
+      <button class="btn btn-warning" id="showResults">Submit</button>
+      <ul class="event-results"></ul>
     </div>
   </div>
 
@@ -69,18 +66,37 @@
   </div>
 
 <style>
+  h1 {
+    font-weight: 200;
+    font-size: 70px;
+    text-shadow: 1px 1px #000000;
+  }
+
+  h3 {
+    text-shadow: 1px 1px #000000;
+  }
+
+  button {
+    color: black;
+    margin-bottom: 5px;
+  }
+
+  input {
+    color: black;
+    margin-bottom: 5px;
+  }
   .event-results {
     text-align: center;
     color: white;
     background-color: black;
-    opacity: 0.7;
+    opacity: 0.8;
     font-size: 18px;
-    width: 60%;
+    width: 90%;
     margin: 0 auto;
     list-style: none;
     border-radius: 10px;
+    padding: 0;
   }
-
   .carousel-inner>img{
     width: 100%;
     margin: 0 auto;
@@ -90,27 +106,6 @@
     width: 100%;
     text-align: center;
   }
-
- h1 {
-   font-weight: 200;
-   font-size: 70px;
-   text-shadow: 1px 1px #000000;
- }
-
- h3 {
-   text-shadow: 1px 1px #000000;
- }
-
- button {
-   color: black;
-   margin-bottom: 5px;
- }
-
- input {
-   color: black;
-   margin-bottom: 5px;
- }
-
   .mainPitch {
     width: 100%;
     color: white;
@@ -119,7 +114,6 @@
     position: absolute;
     top: 80px;
   }
-
 </style>
 
 <script type="text/javascript">
@@ -128,7 +122,7 @@
     //empty the list in case of additional request
     $('.event-results').empty()
     //set variable for api call uri
-    var query = '/api/events/' + $('#zipcode').val() + '/'
+    var query = '/api/events/' + $('#location').val() + '/' + $('#radius').val() + '/'
     $.ajax({
 			url: query,
 			method: 'GET',
@@ -137,38 +131,18 @@
           var eventSpan = '<span class="event-name">' + e.title + '</span>'
           var dateSpan = '<span class="event-date">' + e.start_time + '</span>'
           var venueSpan = '<span class="event-venue">' + e.venue_name + '</span>'
-          // var showDetails = '<a id="'+ e.$.id + '" class="show-details" href="http://api.eventful.com/json/events/get?id=' + e.$.id + '&app_key=tX9rVSJRM96LsCtP">Show</a>'
           var showDetails = '<a id="'+ e.$.id + '" class="show-details" href="/events/' + e.$.id + '" ">Show</a>'
           var li = '<li>' + eventSpan + ' | Date: ' + dateSpan + ' | ' + venueSpan + ' ' + showDetails + '</li>'
           $('.event-results').append(li)
-          console.log(e.$.id)
         })
         $('.show-details').on('click', function(evt){
-          console.log(evt.target.id)
           $.ajax({
-            url: 'api/events/single/' + evt.target.id + '/',
+            url: '/api/event/single/' + evt.target.id + '/',
             method: 'GET',
             success: function(data){
               console.log(data)
             }
           })
-          // $.ajax({
-          //   url: 'http://api.eventful.com/json/events/get?id=' + evt.target.id + '&app_key=tX9rVSJRM96LsCtP',
-          //   dataType: 'jsonp',
-          //   method: 'GET',
-          //   success: function(data){
-          //     console.log(data)
-          //
-          //   }
-          // })
-          // $.ajax({
-          //   url: '/api/users/',
-          //   method: 'GET',
-          //   success: function(data){
-          //     console.log(data)
-          //     console.log(res)
-          //   }
-          // })
         })
       }
     })

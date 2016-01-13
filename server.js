@@ -96,24 +96,41 @@ app.get('/events/:id', function(req,res){
         }
       }
       //built in node-soundcloud method that searches using created performer array
-      SC.get('/tracks', {q: performers}, function(err, track) {
-        if(track){
-          if (err) throw err
-          console.log('success')
-          //retrieve soundcloud id for 3 songs for embedded soundcloud player on show page
-          song1 = track[0].id
-          song2 = track[1].id
-          song3 = track[2].id
-          //retrieve url of show for saving purposes
-          bookmarkURL = req.url
-          res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3, bookmarkURL: bookmarkURL})
-        }
-        else {
-          console.log('failure')
+      if(performers.length > 1) {
+        SC.get('/tracks', {q: performers[0]}, function(err, track) {
+          if(track){
+            if (err) throw err
+            console.log('success')
+            //retrieve soundcloud id for 3 songs for embedded soundcloud player on show page
+            song1 = track[0].id
+            song2 = track[1].id
+            song3 = track[2].id
+            //retrieve url of show for saving purposes
+            bookmarkURL = req.url
+            res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3, bookmarkURL: bookmarkURL})
+          }
+        })
+      }
+      if(performers.length == 1) {
+        SC.get('/tracks', {q: performers}, function(err, track) {
+          if(track){
+            if (err) throw err
+            console.log('success')
+            //retrieve soundcloud id for 3 songs for embedded soundcloud player on show page
+            song1 = track[0].id
+            song2 = track[1].id
+            song3 = track[2].id
+            //retrieve url of show for saving purposes
+            bookmarkURL = req.url
+            res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3, bookmarkURL: bookmarkURL})
+          }
+        })
+      }
+      if(performers.length == 0) {
+          console.log('no performers')
           //in the event the soundcloud query returns no results
           res.render('show', {event: JSON.parse(body), songId: null})
-        }
-      })
+      }
     }
   })
 })
