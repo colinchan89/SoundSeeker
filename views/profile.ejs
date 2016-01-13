@@ -1,36 +1,30 @@
-<div class="page-header">
+<img src="http://i.imgur.com/Ubw2cGD.jpg">
 
-    <h1><%= user.local.name || user.facebook.name %></h1>
-
-    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-
-</div>
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-        <div class="well">
-
-        <% if(user.facebook.id) { %>
-            <h3>Facebook User</h3>
-        <% } else { %>
-            <h3>Locally Stored User</h3>
-        <% } %>
-            <p>
-                <strong>Name</strong>: <%= user.local.name || user.facebook.name %><br>
-                <strong>Zip</strong>: <%= user.local.zip %><br>
-                <strong>Bookmarks</strong>: <%= user.local.bookmarks[0] %><br>
-                <!-- <strong>id</strong>: <%= user._id %><br> -->
-                <strong>email</strong>: <%= user.local.email || user.facebook.email %><br>
-                <!-- <strong>password</strong>: <%= user.local.password || user.facebook.token%> -->
-            </p>
-
-            <img src="http://hothardware.com/newsimages/Item9668/DJ-Hero.jpg">
-
-        </div>
-    </div>
+<div class="profile-container">
+  <h2>Welcome <%= user.local.name || user.facebook.name %>!</h2>
+  <% if(user.facebook.id) { %>
+      <h6>Facebook User</h6>
+  <% } else { %>
+      <h6>Locally Stored User</h6>
+  <% } %>
+  <h6>Bookmarks: <a href="#">Link</a></h6>
+  <h6>id: <%= user._id %></h6>
+  <h6>email: <%= user.local.email || user.facebook.email %></h6>
 </div>
 
-<style media="screen">
-  .row{
-    text-align: center;
+
+<style>
+  body {
+    background-color: black;
+  }
+  img {
+    height: 100vh;
+    float: right;
+  }
+  .profile-container {
+    position: absolute;
+    text-align: left;
+    margin-top: 6%;
+    margin-left: 6%;
   }
 </style>
