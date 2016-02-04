@@ -12,8 +12,8 @@ SC.init({
 	accessToken: 'https://api.soundcloud.com/oauth2/token'
 })
 
-soundcloud.get('/events/:location/:radius', function(req,res){
-	client.searchEvents({ keywords: 'concerts', location: req.params.location, within: req.params.radius, date: 'This Week', sort_order: 'popularity'}, function(err, data){
+soundcloud.get('/events/:location/:radius/:timespan', function(req,res){
+	client.searchEvents({ keywords: 'concerts', location: req.params.location, within: req.params.radius, date: req.params.timespan, sort_order: 'popularity'}, function(err, data){
 		if(err) throw err
 		var events = data.search.events.event
 		res.json(events)

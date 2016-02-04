@@ -36,35 +36,19 @@
         <div class="col-md-3 col-centered">
           <label for="radius">Search Radius (in miles)</label>
           <input type="number" class="form-control" min="1" max="20" step="1" value="10" id="radius">
+        </div><br>
+        <div class="col-centered">
+          <select name="timespan" id="timespan">
+            <option value="today">Today</option>
+            <option value="This Week">This Week (within 7 days)</option>
+          </select>
         </div>
       </div>
       <button class="btn btn-default" id="showResults">Submit</button>
       <ul class="event-results"></ul>
     </div>
   </div>
-
-    <!-- <div class="mainPitch" style="position:absolute; top:50px;">
-     <div class="container">
-       <div class="row">
-         <div class="col-xs-6" style="text-align:center;">
-           <h1>Reach  out  to  Apartment  Residents</h1>
-           <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </h3>
-           <div class="mainAction"><a class="btn btn-danger" href="">a</a><a class="btn btn-success" href="">a</a></div>
-         </div>
-       </div>
-     </div>
-</div> -->
-
-    <!-- Controls -->
-    <!-- <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a> -->
-  </div>
+</div>
 
 <style>
   h1 {
@@ -129,7 +113,7 @@
     //empty the list in case of additional request
     $('.event-results').empty()
     //set variable for api call uri
-    var query = '/api/events/' + $('#location').val() + '/' + $('#radius').val() + '/'
+    var query = '/api/events/' + $('#location').val() + '/' + $('#radius').val() + '/' + $('#timespan').val()
     $.ajax({
 			url: query,
 			method: 'GET',
