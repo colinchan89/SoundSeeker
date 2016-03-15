@@ -109,7 +109,7 @@
 
 <script type="text/javascript">
   //submit button
-  $('#showResults').on('click',function(evt){
+  $('#showResults').click(function(e){
     //empty the list in case of additional request
     $('.event-results').empty()
     //set variable for api call uri
@@ -126,13 +126,18 @@
           var li = '<li>' + eventSpan + ' | Date: ' + dateSpan + ' | ' + venueSpan + ' ' + showDetails + '</li>'
           $('.event-results').append(li)
         })
-        $('.show-details').on('click', function(evt){
+        $('.show-details').click(function(e){
           $.ajax({
-            url: '/api/event/single/' + evt.target.id + '/',
+            url: '/api/event/single/' + e.target.id + '/',
             method: 'GET'
           })
         })
       }
-    })
+    });
   })
+  $('#location').keypress(function(e){
+    if(e.which == 13){//Enter key pressed
+      $('#showResults').click();//Trigger search button click event
+    }
+  });
 </script>
