@@ -129,10 +129,7 @@
         $('.show-details').on('click', function(evt){
           $.ajax({
             url: '/api/event/single/' + evt.target.id + '/',
-            method: 'GET',
-            success: function(data){
-              console.log(data)
-            }
+            method: 'GET'
           })
         })
       }
