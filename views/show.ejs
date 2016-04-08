@@ -18,26 +18,21 @@
 <% } else { %>
 	<h5>No Online Ticket Source</h5>
 <% } %>
-<button type="submit" class="btn btn-info btn-md" id="bookmark">Bookmark This Show</button><br><br>
+<!-- <button type="submit" class="btn btn-info btn-md" id="bookmark">Bookmark This Show</button><br><br> -->
 <footer>
 <% if(event.performers && songId){ %>
 	<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/<%= songId %>&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
 	<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/<%= songId2 %>&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
 	<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/<%= songId3 %>&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+	<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/<%= songId4 %>&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+	<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/<%= songId5 %>&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
 <% } else { %>
 	<h5> Unable To Generate Song For This Performer <h5>
 <% } %>
 </footer>
 
-<style>
-	body {
-		padding-top: 50px;
-		text-align: center;
-		list-style: none;
-	}
-</style>
-<script>
+<!-- <script>
 	$('#bookmark').on('click', function(){
 		console.log()
 	})
-</script>
+</script> -->

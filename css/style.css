@@ -1,1 +1,97 @@
 
+/** Global styles **/
+* {
+  font-family: 'Avenir';
+  font-weight: 200;
+}
+body {
+  background-color: #1C1C1C;
+  color: #FFFFFF;
+}
+input {
+  color: black;
+  margin-bottom: 5px;
+  text-align: center;
+}
+.header {
+  font-size: 60px;
+}
+.subheader {
+  font-size: 30px;
+  margin-top: -40px;
+}
+.col-centered {
+  display:inline-block;
+  float:none;
+  text-align: center;
+}
+.event-results {
+  text-align: center;
+  background-color: black;
+  opacity: 0.8;
+  font-size: 18px;
+  width: 90%;
+  margin: 0 auto;
+  list-style: none;
+  border-radius: 10px;
+  padding: 0;
+  margin-top: 10px;
+}
+.container {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+}
+/** Nav Styles **/
+/*ul {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+}
+nav {
+  background-color: #1C1C1C;
+  width: 100%;
+  color: #CCCCCC;
+  position: absolute;
+  z-index: 1;
+}
+nav a {
+  display: block;
+  width: 100px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #CCCCCC;
+}
+nav a:visited {
+  color: #CCCCCC;
+}
+nav a:hover {
+  color: #FFFFFF;
+}
+.nav_item {
+  display: inline-block;
+  padding-right: 50px;
+  text-decoration: none;
+  float: left;
+  margin-right: 1px;
+}*/
+/** Responsive Nav Effects **/
+/*li:hover ul a {
+  font-size: 16px;
+}
+li:hover ul a:hover {
+  color: red;
+}
+li ul {
+  display: none;
+}
+li ul li {
+  display: inline;
+  float: none;
+}
+ul li a:hover + .hidden, .hidden:hover {
+  display: block;
+}*/
