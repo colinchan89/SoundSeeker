@@ -111,7 +111,7 @@ app.get('/events/:id', function(req,res){
             song5 = track[4].id
             //retrieve url of show for saving purposes
             bookmarkURL = req.url
-            res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3, songId4: song4, songId5: song5, bookmarkURL: bookmarkURL})
+            res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3, songId4: song4, songId5: song5})
           }
         })
       }
@@ -127,13 +127,13 @@ app.get('/events/:id', function(req,res){
             song5 = track[4].id
             //retrieve url of show for saving purposes
             bookmarkURL = req.url
-            res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3, songId4: song4, songId5: song5, bookmarkURL: bookmarkURL})
+            res.render('show', {event: JSON.parse(body), songId: song1, songId2: song2, songId3: song3, songId4: song4, songId5: song5})
           }
         })
       }
       if(performers.length == 0) {
           //in the event the soundcloud query returns no results
-          res.render('show', {event: JSON.parse(body), songId: null, bookmarkURL:bookmarkURL})
+          res.render('show', {event: JSON.parse(body), songId: null})
       }
     }
   })

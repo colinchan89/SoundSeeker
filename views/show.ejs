@@ -1,23 +1,25 @@
-<h2><%= event.title %></h2>
-<h4>Date & Time: <%= event.start_time %></h4>
-<h4>Venue: <%= event.venue_name %></h4>
-<h4>Location: <%= event.city %>, <%= event.region %>, <%= event.country_abbr %></h4>
-<h4>Performers:
-	<% if(event.performers){ %>
-		<% if(event.performers.performer.length > 1){ %>
-			<% event.performers.performer.forEach(function(n){ %>
-			 <li><%= n.name %></li>
-		<% })} else { %>
-			<li><%= event.performers.performer.name %></li>
-	<% }} else{ %> No Listed Performers
+<div class="show-container">
+	<h2><%= event.title %></h2>
+	<h4>Date & Time: <%= event.start_time %></h4>
+	<h4>Venue: <%= event.venue_name %></h4>
+	<h4>Location: <%= event.city %>, <%= event.region %>, <%= event.country_abbr %></h4>
+	<h4>Performers:
+		<% if(event.performers){ %>
+			<% if(event.performers.performer.length > 1){ %>
+				<% event.performers.performer.forEach(function(n){ %>
+				 <li><%= n.name %></li>
+			<% })} else { %>
+				<li><%= event.performers.performer.name %></li>
+		<% }} else{ %> No Listed Performers
+		<% } %>
+	</h4>
+	<h5>Price: <%= event.price %></h5>
+	<% if(event.links) { %>
+		<h5><a href="<%= event.links.link[0].url %>">Tickets</a></h5>
+	<% } else { %>
+		<h5>No Online Ticket Source</h5>
 	<% } %>
-</h4>
-<h5>Price: <%= event.price %></h5>
-<% if(event.links) { %>
-	<h5><a href="<%= event.links.link[0].url %>">Tickets</a></h5>
-<% } else { %>
-	<h5>No Online Ticket Source</h5>
-<% } %>
+<div>
 <!-- <button type="submit" class="btn btn-info btn-md" id="bookmark">Bookmark This Show</button><br><br> -->
 <footer>
 <% if(event.performers && songId){ %>
